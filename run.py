@@ -23,10 +23,21 @@ async def on_message(message):
         return
 
     if not message.guild:
-        print(message.content)
         await message.channel.send("Please buy more G packs to fund my yacht")
         return
 
-    await message.channel.send("Hey, it's me, Kondo!")
+    # Mod commands
+    if not "Mods" in [x.name for x in message.author.roles]:
+        return
+
+    if message.content == "!rename":
+        await rename_users(message.guild)
+
+# Renames all users with nicknames starting with "!"
+async def rename_users(guild):
+    users = await guild.query_members("!")
+    for i in range(len(users)):
+        user = users[i]
+        await user.edit(nick="Hardcore Kondo Oshi")
 
 client.run(TOKEN)
