@@ -27,6 +27,6 @@ async def on_message(message):
         await message.channel.send("Please buy more G packs to fund my yacht")
         return
 
-    print("Hey, it's me, Kondo!")
+    await message.channel.send("Hey, it's me, Kondo!")
 
 client.run(TOKEN)
