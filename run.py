@@ -31,13 +31,24 @@ async def on_message(message):
         return
 
     if message.content == "!rename":
-        await rename_users(message.guild)
+        print("Renaming time")
+        done = False
+        users = 0
+        while not done:
+            done, new_users = await rename_users(message.guild)
+            users += new_users
+        await message.channel.send("Kondo-ified {0} users.".format(users))
 
 # Renames all users with nicknames starting with "!"
 async def rename_users(guild):
-    users = await guild.query_members("!")
+    users = await guild.query_members("!", limit=100)
+    if len(users) == 0:
+        return True
+    print(users)
     for i in range(len(users)):
         user = users[i]
+        print(user)
         await user.edit(nick="Hardcore Kondo Oshi")
+    return False, len(users)
 
 client.run(TOKEN)
