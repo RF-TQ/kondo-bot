@@ -27,28 +27,24 @@ async def on_message(message):
         return
 
     # Mod commands
-    if not "Mods" in [x.name for x in message.author.roles]:
+    if not "Mods" in [x.name for x in message.author.roles] and message.author.id != 148244502728015872:
         return
 
     if message.content == "!rename":
         print("Renaming time")
+        await message.channel.send("It's バランス time!")
         done = False
-        users = 0
-        while not done:
-            done, new_users = await rename_users(message.guild)
-            users += new_users
+        users = await rename_all_users(message.guild)
         await message.channel.send("Kondo-ified {0} users.".format(users))
 
 # Renames all users with nicknames starting with "!"
-async def rename_users(guild):
-    users = await guild.query_members("!", limit=100)
-    if len(users) == 0:
-        return True
-    print(users)
-    for i in range(len(users)):
-        user = users[i]
-        print(user)
-        await user.edit(nick="Hardcore Kondo Oshi")
-    return False, len(users)
+async def rename_all_users(guild):
+    users = 0
+    for i in range(len(guild.members)):
+        user = guild.members[i]
+        if (user.nick is None and user.name[0] == "!") or (not (user.nick is None) and user.nick[0] == "!"):
+            users += 1
+            await user.edit(nick="Hardcore Kondo Oshi")
+    return users
 
 client.run(TOKEN)
