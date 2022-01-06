@@ -21,12 +21,11 @@ async def on_ready():
 async def on_message(message):
     if message.author == client.user:
         return
-
-    if message.author.id == 319599477424128001:
-        await message.channel.send("If you don't buy a G pack I'm making a 33 that's worse than Roku")
-        return
-
+    
     if not message.guild:
+        if message.author.id == 319599477424128001:
+            await message.channel.send("If you don't buy a G pack I'm making a 33 that's worse than Roku")
+            return
         await message.channel.send("Please buy more G packs to fund my yacht")
         return
 
