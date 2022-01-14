@@ -2,3 +2,4 @@ async-timeout==3.0.1
 discord.py==1.7.3
 python-dotenv==0.19.1
 virtualenv==20.4.7
+apscheduler==3.8.1
