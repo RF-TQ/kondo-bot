@@ -61,7 +61,7 @@ async def on_message(message):
         await update_event_timer(message.guild, set_tl=" ".join(args))
 
 async def run_tasks():
-    guild = client.get_guild(test_server_id)
+    guild = client.get_guild(sekaicord_id)
     await update_event_timer(guild)
     await rename_all_users(guild)
 
