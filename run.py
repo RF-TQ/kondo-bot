@@ -100,8 +100,10 @@ async def update_event_timer(guild, set_tl=""):
     # Get event properties
     start_time = event["startAt"]
     start_verb = "starts"
+    current_next = "next"
     if now_ms > start_time:
         start_verb = "started"
+        current_next = "current"
     end_time = event["aggregateAt"]
     end_verb = "ends"
     if now_ms > end_time:
@@ -118,7 +120,7 @@ async def update_event_timer(guild, set_tl=""):
     logo_url = "https://sekai-res.dnaroma.eu/file/sekai-assets/event/{0}/logo_rip/logo.webp".format(newest_event["assetbundleName"])
     embed = discord.Embed()
     embed.set_image(url=logo_url)
-    text = "The current event, **{0}**, {1} **<t:{2}:R>** on **<t:{3}:F>**.\n\nIt {4} **<t:{5}:R>** on **<t:{6}:F>**.".format(event_name_tl, start_verb, start_sec, start_sec, end_verb, end_sec, end_sec)
+    text = "The {0} event, **{1}**, {2} **<t:{3}:R>** on **<t:{4}:F>**.\n\nIt {5} **<t:{6}:R>** on **<t:{7}:F>**.".format(current_next, event_name_tl, start_verb, start_sec, start_sec, end_verb, end_sec, end_sec)
     if last_message is not None and text == last_message.content:
         return
     if last_message is not None:
